@@ -1,0 +1,16 @@
+<div class="col-lg-4">
+    <div class="contact-box" ng-click='editCustomer()'>
+        <a ui-sref="profile">            
+            <div class="col-sm-12">
+                <h3><strong>{{ customer.name }}</strong></h3>
+
+                <p><i class="fa fa-map-marker"></i> {{ customer.street }} {{ customer.zip }} {{ customer.city }}</p>
+                <p>                    
+                    <i class="fa fa-phone"></i> {{ customer.phone }}
+                </p>
+                <p><i class="fa fa-at"></i> {{ customer.email }}</p>
+            </div>
+            <div class="clearfix"></div>
+        </a>
+    </div>
+</div>

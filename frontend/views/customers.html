@@ -1,0 +1,18 @@
+<div class="wrapper wrapper-content animated fadeInRight"  ng-controller="CustomersController as customersCtrl" >       
+    <div class="ibox-content m-b-sm border-bottom">
+        <div class="row m-b-sm m-t-sm">					
+			<div class="col-md-10">
+				<div class="input-group"><input type="text" placeholder="Zoeken" class="input-sm form-control" ng-model="search.name"> <span class="input-group-btn">
+														<button type="button" class="btn btn-sm btn-primary" ng-click="getCustomers()"> Zoek!</button> </span>
+                </div>
+			</div>
+            <div class="col-md-2">
+                <a href="" class="btn btn-primary btn-xs" ng-click="addCustomer()">Nieuwe klant</a>
+            </div>
+		</div>
+    </div>        
+  
+    <div class="row">
+        <customer-box ng-repeat="c in customers" customer='c' ng-click="editCustomer(c)"></customer-box>
+    </div>
+</div>

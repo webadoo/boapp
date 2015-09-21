@@ -1,0 +1,46 @@
+<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">{{ title }}</h4>        
+    </div>
+    <div class="modal-body">        
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-12">
+                    <label>Titel</label> 
+                    <input type="text" placeholder="Titel..." class="form-control" ng-model="project.title">
+                </div>                
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <label>Omschrijving</label> 
+                    <input type="text" placeholder="Omschrijving..." class="form-control" ng-model="project.description">
+                </div>               
+            </div>
+            <div class="row">
+                 <div class="col-sm-12">                    
+                    <label>Klant</label> 
+                     <select class="form-control m-b" name="multipleSelect" id="multipleSelect" ng-model="data.singleSelect">
+                        <option value="option-1">Ad</option>
+                        <option value="option-2">Gio</option>
+                        <option value="option-3">Ward</option>
+                     </select>
+                </div>                    
+            </div> 
+            <div class="row">
+                 <div class="col-sm-12">                    
+                    <label>Status</label> 
+                     <select class="form-control m-b" name="multipleSelect" id="multipleSelect" ng-model="data.multipleSelect">
+                        <option value="option-1">Ad</option>
+                        <option value="option-2">Gio</option>
+                        <option value="option-3">Ward</option>
+                     </select>
+                </div>                    
+            </div>           
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-white" ng-click="cancel()">Annuleren</button>
+        <button type="button" class="btn btn-primary" ng-click="ok()">Opslaan</button>
+        <button type="button" class="btn btn-primary" ng-click="ok()">Opslaan en naar detail</button>
+    </div>
+</div>
