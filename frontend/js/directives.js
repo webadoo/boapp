@@ -148,18 +148,6 @@ function minimalizaSidebar($timeout) {
 }
 
 
-function customerBox($timeout) {
-    return {
-        restrict: 'EA',
-        scope: {
-            customer: '='        
-        },
-        replace: true, 
-        templateUrl: 'views/customerbox.html',  
-    };
-}
-
-
 /**
  *
  * Pass all functions into module
@@ -170,5 +158,4 @@ angular
     .directive('sideNavigation', sideNavigation)
     .directive('iboxTools', iboxTools)
     .directive('minimalizaSidebar', minimalizaSidebar)
-    .directive('iboxToolsFullScreen', iboxToolsFullScreen)
-    .directive('customerBox', customerBox);
+    .directive('iboxToolsFullScreen', iboxToolsFullScreen);

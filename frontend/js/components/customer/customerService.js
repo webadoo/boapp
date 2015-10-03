@@ -47,3 +47,11 @@ app.factory('CustomerService', function($resource, configParseAPI) {
 		}
 	})
 });
+
+app.factory('CustomerModalService', function() {
+	return {
+		editCustomer: function() {
+			console.log('CustomerModalService.editCustomer()');
+		}
+	}
+});
