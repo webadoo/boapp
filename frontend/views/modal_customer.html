@@ -1,46 +1,46 @@
 <div class="inmodal">
     <div class="modal-header">        
-        <h4 class="modal-title">{{ title }}</h4>        
+        <h4 class="modal-title">{{ modal.vm.title }}</h4>        
     </div>
     <div class="modal-body">        
         <div class="form-group">
             <div class="row">
                 <div class="col-sm-12">
                     <label>Naam</label> 
-                    <input type="text" placeholder="Naam..." class="form-control" ng-model="customer.name">
+                    <input type="text" placeholder="Naam..." class="form-control" ng-model="modal.vm.customer.name">
                 </div>                
             </div>
             <div class="row">
                 <div class="col-sm-12">
                     <label>Straat</label> 
-                    <input type="text" placeholder="Straat + nummer..." class="form-control" ng-model="customer.street">
+                    <input type="text" placeholder="Straat + nummer..." class="form-control" ng-model="modal.vm.customer.street">
                 </div>               
             </div>
             <div class="row">
                  <div class="col-sm-6">                    
                     <label>Postcode</label> 
-                    <input type="text" placeholder="Postcode..." class="form-control" ng-model="customer.zip">
+                    <input type="text" placeholder="Postcode..." class="form-control" ng-model="modal.vm.customer.zip">
                 </div>
                 <div class="col-sm-6">
                     <label>Gemeente</label> 
-                    <input type="text" placeholder="Gemeente..." class="form-control" ng-model="customer.city">
+                    <input type="text" placeholder="Gemeente..." class="form-control" ng-model="modal.vm.customer.city">
                 </div>                       
             </div> 
             <div class="row">                                                
                 <div class="col-sm-6">
                     <label>Email</label> 
-                    <input type="email" placeholder="Email..." class="form-control" ng-model="customer.email">
+                    <input type="email" placeholder="Email..." class="form-control" ng-model="modal.vm.customer.email">
                 </div>
                  <div class="col-sm-6">
                     <label>Telefoon</label> 
-                    <input type="text" placeholder="Telefoon..." class="form-control" ng-model="customer.phone">
+                    <input type="text" placeholder="Telefoon..." class="form-control" ng-model="modal.vm.customer.phone">
                 </div>
             </div>
             
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-white" ng-click="cancel()">Sluiten</button>
-        <button type="button" class="btn btn-primary" ng-click="ok()">Opslaan</button>
+        <button type="button" class="btn btn-white" ng-click="modal.cancel()">Sluiten</button>
+        <button type="button" class="btn btn-primary" ng-click="modal.ok()">Opslaan</button>
     </div>
 </div>

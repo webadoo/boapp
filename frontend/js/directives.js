@@ -165,7 +165,7 @@ function customerBox($timeout) {
  * Pass all functions into module
  */
 angular
-    .module('inspinia')
+    .module('boapp')
     .directive('pageTitle', pageTitle)
     .directive('sideNavigation', sideNavigation)
     .directive('iboxTools', iboxTools)

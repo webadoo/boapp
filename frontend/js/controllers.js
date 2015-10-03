@@ -2,7 +2,7 @@
  * INSPINIA - Responsive Admin Theme
  *
  */
-var app = angular.module('inspinia');
+var app = angular.module('boapp');
 
 app.controller('MainController', function() {
    this.userName = 'Bart Ongena' 
@@ -11,73 +11,73 @@ app.controller('MainController', function() {
 /**
  * CustomersController
  */
-app.controller('CustomersController', function($scope, $modal, CustomersService, CustomerService) {
-
-   $scope.search = { 
-       name: '' 
-   };
-   
-   $scope.getCustomers = function() {	       
-	 	 CustomersService.query({ where: $scope.where, order: 'name' }).$promise.then(function(result) {
-			console.log(result);  
-			$scope.customers = result.results;
-            console.log($scope.customers);
-	  });		 		 
-   };      
-   
-   $scope.addCustomer = function() {
-       var modalInstance = $modal.open({
-          templateUrl: 'views/modal_customer.html',
-          controller: AddCustomerModalInstanceController,
-          scope: $scope    
-       });
-       
-       modalInstance.result.then(function(customer) {
-          console.log(customer);
-          CustomersService.create(customer); 
-       });     
-   };
-   
-   $scope.editCustomer = function(customer) {
-       var modalInstance = $modal.open({
-          templateUrl: 'views/modal_customer.html',
-          controller: EditCustomerModalInstanceController,
-          resolve: {
-              customer: function() {
-                return customer;  
-              } 
-          }   
-       });
-       
-       modalInstance.result.then(function(customer) {
-          CustomerService.update(customer); 
-       });     
-   };
-});
-
-function AddCustomerModalInstanceController ($scope, $modalInstance) {
-    $scope.title = "Klant toevoegen";
-    $scope.customer = {};
-    $scope.ok = function () {
-        $modalInstance.close($scope.customer);
-    };
-
-    $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-    };
-}
-
-function EditCustomerModalInstanceController ($scope, $modalInstance, customer) {
-    $scope.title = "Klant aanpassen";
-    $scope.customer = customer;
-    $scope.ok = function () {
-        $modalInstance.close($scope.customer);
-    };
-
-    $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-    };
-}
+// app.controller('CustomersController_old', function($scope, $modal, CustomersService, CustomerService) {
+// 
+//    $scope.search = { 
+//        name: 'test' 
+//    };
+//    
+//    $scope.getCustomers = function() {	       
+// 	 	 CustomersService.query({ where: $scope.where, order: 'name' }).$promise.then(function(result) {
+// 			console.log(result);  
+// 			$scope.customers = result.results;
+//             console.log($scope.customers);
+// 	  });		 		 
+//    };      
+//    
+//    $scope.addCustomer = function() {
+//        var modalInstance = $modal.open({
+//           templateUrl: 'views/modal_customer.html',
+//           controller: AddCustomerModalInstanceController,
+//           scope: $scope    
+//        });
+//        
+//        modalInstance.result.then(function(customer) {
+//           console.log(customer);
+//           CustomersService.create(customer); 
+//        });     
+//    };
+//    
+//    $scope.editCustomer = function(customer) {
+//        var modalInstance = $modal.open({
+//           templateUrl: 'views/modal_customer.html',
+//           controller: EditCustomerModalInstanceController,
+//           resolve: {
+//               customer: function() {
+//                 return customer;  
+//               } 
+//           }   
+//        });
+//        
+//        modalInstance.result.then(function(customer) {
+//           CustomerService.update(customer); 
+//        });     
+//    };
+// });
+// 
+// function AddCustomerModalInstanceController ($scope, $modalInstance) {
+//     $scope.title = "Klant toevoegen";
+//     $scope.customer = {};
+//     $scope.ok = function () {
+//         $modalInstance.close($scope.customer);
+//     };
+// 
+//     $scope.cancel = function () {
+//         $modalInstance.dismiss('cancel');
+//     };
+// }
+// 
+// function EditCustomerModalInstanceController ($scope, $modalInstance, customer) {
+//     $scope.title = "Klant aanpassen";
+//     $scope.customer = customer;
+//     $scope.ok = function () {
+//         $modalInstance.close($scope.customer);
+//     };
+// 
+//     $scope.cancel = function () {
+//         $modalInstance.dismiss('cancel');
+//     };
+// }
 
 
 /**

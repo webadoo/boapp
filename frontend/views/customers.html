@@ -1,18 +1,17 @@
-<div class="wrapper wrapper-content animated fadeInRight"  ng-controller="CustomersController as customersCtrl" >       
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="CustomersController as cust" >       
     <div class="ibox-content m-b-sm border-bottom">
         <div class="row m-b-sm m-t-sm">					
 			<div class="col-md-10">
-				<div class="input-group"><input type="text" placeholder="Zoeken" class="input-sm form-control" ng-model="search.name"> <span class="input-group-btn">
-														<button type="button" class="btn btn-sm btn-primary" ng-click="getCustomers()"> Zoek!</button> </span>
+				<div class="input-group"><input type="text" placeholder="Zoeken" class="input-sm form-control" ng-model="cust.vm.search"> <span class="input-group-btn">
+														<button type="button" class="btn btn-sm btn-primary" ng-click="cust.getCustomers()"> Zoek!</button> </span>
                 </div>
 			</div>
             <div class="col-md-2">
-                <a href="" class="btn btn-primary btn-xs" ng-click="addCustomer()">Nieuwe klant</a>
+                <a href="" class="btn btn-primary btn-sm" ng-click="cust.addCustomer()">Nieuwe klant</a>
             </div>
 		</div>
     </div>        
-  
     <div class="row">
-        <customer-box ng-repeat="c in customers" customer='c' ng-click="editCustomer(c)"></customer-box>
+        <customer-box ng-repeat="c in customers" customer='c' ng-click="cust.editCustomer(c)"></customer-box>
     </div>
 </div>

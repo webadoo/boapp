@@ -1,9 +1,9 @@
-var app = angular.module('inspinia');
+var app = angular.module('boapp');
 
 /**
  * Customers
  */
-app.factory('CustomersService', function($resource, configParseAPI) {
+app.factory('CustomersService_old', function($resource, configParseAPI) {
 	return $resource(configParseAPI.api_url + 'Customer', {}, {
         query: { 
 			method: 'GET', 
@@ -23,7 +23,7 @@ app.factory('CustomersService', function($resource, configParseAPI) {
     })
 });
 
-app.factory('CustomerService', function($resource, configParseAPI) {
+app.factory('CustomerService_old', function($resource, configParseAPI) {
 	return $resource(configParseAPI.api_url + 'Customer/:id', {}, {
 		show: { 
 			method: 'GET',						

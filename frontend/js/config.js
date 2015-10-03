@@ -44,6 +44,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
             url: "/timeregistration",
             templateUrl: "views/minor.html",
             data: { pageTitle: 'Tijdsregistratie' }
+        })
+        .state('index.settings', {
+            url: "/settings",
+            templateUrl: "views/minor.html",
+            data: { pagetitle: 'Instellingen' }  
         });
      
      this.api_url_classes = 'https://api.parse.com/1/classes/';
@@ -51,7 +56,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 	 this.parse_rest_api_key = 'RknJYgwv37RK1GD5CD9CJxs4Ft7ky9IfACaKhBwL';
 }
 angular
-    .module('inspinia')
+    .module('boapp')
     .config(config)
     .constant('configParseAPI', {
 		'api_url': 'https://api.parse.com/1/classes/',
