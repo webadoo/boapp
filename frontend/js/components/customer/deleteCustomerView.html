@@ -1,0 +1,12 @@
+<div class="inmodal">
+    <div class="modal-header">        
+        <h4 class="modal-title">{{ modal.vm.title }}</h4>        
+    </div>
+    <div class="modal-body">        
+        Bent u zeker dat u <strong>{{ modal.vm.customer.name }}</strong> wilt verwijderen?
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-white" ng-click="modal.cancel()">Sluiten</button>
+        <button type="button" class="btn btn-primary" ng-click="modal.ok()">Opslaan</button>
+    </div>
+</div>

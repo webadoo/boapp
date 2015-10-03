@@ -27,7 +27,38 @@ app.controller('CustomersController', ['$scope', '$modal', 'CustomersService', '
 	 }
 	 
 	 this.editCustomer = function(customer) {
-		 console.log('customerController.editCustomer(): id:' + customer);
+		 console.log('customerController.editCustomer():' + customer);
+		 
+		 var modalInstance = $modal.open({
+			 templateUrl: 'views/modal_customer.html',
+			 controller: 'EditCustomerModalInstanceController as modal',
+			 resolve: {
+				 customer: function() {
+					 return customer;
+				 }
+			 }
+		 });
+		 
+		 modalInstance.result.then(function(customer) {
+			 CustomerService.update(customer);
+		 });
+	 }
+	 
+	 this.deleteCustomer = function(customer) {
+		 console.log('customerController.deleteCustomer(): ' + customer);
+		 var modalInstance = $modal.open({
+			 templateUrl: 'deleteCustomerView.html',
+			 controller: 'DeleteCustomerModalInstanceController as modal',
+			 resolve: {
+				 customer: function() {
+					 return customer;
+				 }
+			 }
+		 });
+		 
+		 modalInstance.result.then(function(customer) {
+			CustomerService.deleteCustomer(customer); 
+		 });
 	 }
 }]);
 
@@ -39,40 +70,47 @@ app.controller('AddCustomerModalInstanceController', function($modalInstance) {
 		customer: {},
 	}
 	
-	this.ok = function() {
+	self.ok = function() {
 		console.log('AddCustomerModalInstanceController.ok()');
 		$modalInstance.close(self.vm.customer);
 	}
 	
-	this.cancel = function() {
+	self.cancel = function() {
 		console.log('AddCustomerModalInstanceController.cancel()');
 		$modalInstance.dismiss('cancel');
 	};
 });
 
-app.controller('EditCustomerModalInstanceController', function($modalInstance) {
+app.controller('EditCustomerModalInstanceController', function($modalInstance, customer) {
 	var self = this;
 	self.vm = {
 		title: "Klant aanpassen",
-		customer: {}
+		customer: customer
 	}
 	
 	self.ok = function() {
 		console.log('EditCustomerModalInstanceController.ok()');
+		$modalInstance.close(self.vm.customer);
 	};
 	
 	self.cancel = function() {
-		
+		console.log('EditCustomerModalInstanceController.cancel()');
+		$modalInstance.dismiss('cancel');
 	}
 });
-// function EditCustomerModalInstanceController ($scope, $modalInstance, customer) {
-//     $scope.title = "Klant aanpassen";
-//     $scope.customer = customer;
-//     $scope.ok = function () {
-//         $modalInstance.close($scope.customer);
-//     };
-// 
-//     $scope.cancel = function () {
-//         $modalInstance.dismiss('cancel');
-//     };
-// }
+
+app.controller('DeleteCustomerModalInstanceController', function($modalInstance, customer) {
+	var self = this;
+	self.vm = {
+		title: "Klant verwijderen",
+		customer: customer
+	}
+	
+	self.ok = function() {
+		console.log('DeleteCustomerModalInstanceController.ok()');
+	}
+	
+	self.cancel = function() {
+		console.log('DeleteCustomerModalInstanceController.cancel()');
+	}
+});
