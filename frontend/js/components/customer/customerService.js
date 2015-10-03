@@ -48,10 +48,23 @@ app.factory('CustomerService', function($resource, configParseAPI) {
 	})
 });
 
-app.factory('CustomerModalService', function() {
+app.factory('CustomerModalService', ['$modal', 'CustomerService', function($modal, CustomerService) {
 	return {
-		editCustomer: function() {
+		editCustomer: function(customer) {
 			console.log('CustomerModalService.editCustomer()');
+			var modalInstance = $modal.open({
+				templateUrl: 'views/modal_customer.html',
+				controller: 'EditCustomerModalInstanceController as modal',
+				resolve: {
+					customer: function() {
+						return customer;
+					}
+				}
+			});
+		 
+			modalInstance.result.then(function(customer) {
+				CustomerService.update(customer);
+			});
 		}
 	}
-});
+}]);

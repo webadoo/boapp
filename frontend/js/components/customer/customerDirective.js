@@ -1,27 +1,39 @@
 var app = angular.module('boapp');
 
-app.directive('customerBox', ['CustomerModalService', function(CustomerModalService) {
+app.directive('customerBox', ['$modal', 'CustomerModalService', 'CustomerService', function($modal, CustomerModalService, CustomerService) {
     
     var controller = function() {
         var self = this;
         
-        self.editCustomer
-          
-//         function init() {
-//             vm.items = angular.copy(vm.datasource);
-//         }
-//               
-//               init();
-//               
-//               vm.addItem = function () {
-//                   vm.add();
-// 
-//                   //Add new customer to directive scope
-//                   vm.items.push({
-//                       name: 'New Directive Controller Item'
-//                   });
-//               };
-    }
+        function init() {
+            self.customer = angular.copy(self.customer);
+        }
+        
+        init();
+        
+        self.editCustomer = function() {
+            console.log('customerBoxDirective.editCustomer()');
+            CustomerModalService.editCustomer(self.customer);
+        }
+        
+        self.deleteCustomer = function() {
+            console.log('customerBoxDirective.deleteCustomer()');
+            var modalInstance = $modal.open({
+			 templateUrl: 'views/modal_customer.html',
+			 controller: 'EditCustomerModalInstanceController as modal',
+			 resolve: {
+				 customer: function() {
+					 return self.customer;
+				 }
+			 }
+		 });
+		 
+		 modalInstance.result.then(function(customer) {
+			 CustomerService.update(customer);
+		 });
+        }
+        
+    };
     
     return {
         restrict: 'EA',
@@ -30,20 +42,8 @@ app.directive('customerBox', ['CustomerModalService', function(CustomerModalServ
         },
         replace: true, 
         templateUrl: 'views/customerbox.html',  
-        editCustomer: function() {
-            console.log('test');
-        }
+        controller: controller,
+        controllerAs: 'vm',
+        bindToController: true
     };
- }]);
-
-
-// function customerBox($timeout) {
-//     return {
-//         restrict: 'EA',
-//         scope: {
-//             customer: '='        
-//         },
-//         replace: true, 
-//         templateUrl: 'views/customerbox.html',  
-//     };
-// }
+}]);

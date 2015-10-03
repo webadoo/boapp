@@ -99,7 +99,7 @@ app.controller('EditCustomerModalInstanceController', function($modalInstance, c
 	}
 });
 
-app.controller('DeleteCustomerModalInstanceController', function($modalInstance, customer) {
+app.controller('DeleteCustomerModalInstanceController', function($modal, customer) {
 	var self = this;
 	self.vm = {
 		title: "Klant verwijderen",
