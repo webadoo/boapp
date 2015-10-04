@@ -18,21 +18,8 @@ app.directive('customerBox', ['$modal', 'CustomerModalService', 'CustomerService
         
         self.deleteCustomer = function() {
             console.log('customerBoxDirective.deleteCustomer()');
-            var modalInstance = $modal.open({
-			 templateUrl: 'views/modal_customer.html',
-			 controller: 'EditCustomerModalInstanceController as modal',
-			 resolve: {
-				 customer: function() {
-					 return self.customer;
-				 }
-			 }
-		 });
-		 
-		 modalInstance.result.then(function(customer) {
-			 CustomerService.update(customer);
-		 });
-        }
-        
+            CustomerModalService.deleteCustomer(self.customer);
+        }     
     };
     
     return {

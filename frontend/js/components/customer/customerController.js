@@ -3,15 +3,18 @@ var app = angular.module('boapp');
 app.controller('CustomersController', ['$scope', '$modal', 'CustomersService', 'CustomerService', function($scope, $modal, CustomersService, CustomerService) {
 	 this.vm = {
 	 	search: '',
+		 customers: {}
 	 };
 	 
 	 this.getCustomers = function() {
 		console.log('customerController.getCustomers()');
-		CustomersService.query({ where: $scope.where, order: 'name' }).$promise.then(function(result) {
+		CustomersService.query({ where: { deleted: false }, order: 'name' }).$promise.then(function(result) {
  			$scope.customers = result.results;
             console.log($scope.customers);
 		});
 	 };
+	 
+	 this.getCustomers();
 	 
 	 this.addCustomer = function() {
 		 console.log('customerController.addCustomer()');
@@ -26,40 +29,40 @@ app.controller('CustomersController', ['$scope', '$modal', 'CustomersService', '
        	 });
 	 }
 	 
-	 this.editCustomer = function(customer) {
-		 console.log('customerController.editCustomer():' + customer);
-		 
-		 var modalInstance = $modal.open({
-			 templateUrl: 'views/modal_customer.html',
-			 controller: 'EditCustomerModalInstanceController as modal',
-			 resolve: {
-				 customer: function() {
-					 return customer;
-				 }
-			 }
-		 });
-		 
-		 modalInstance.result.then(function(customer) {
-			 CustomerService.update(customer);
-		 });
-	 }
+	//  this.editCustomer = function(customer) {
+	// 	 console.log('customerController.editCustomer():' + customer);
+	// 	 
+	// 	 var modalInstance = $modal.open({
+	// 		 templateUrl: 'views/modal_customer.html',
+	// 		 controller: 'EditCustomerModalInstanceController as modal',
+	// 		 resolve: {
+	// 			 customer: function() {
+	// 				 return customer;
+	// 			 }
+	// 		 }
+	// 	 });
+	// 	 
+	// 	 modalInstance.result.then(function(customer) {
+	// 		 CustomerService.update(customer);
+	// 	 });
+	//  }
 	 
-	 this.deleteCustomer = function(customer) {
-		 console.log('customerController.deleteCustomer(): ' + customer);
-		 var modalInstance = $modal.open({
-			 templateUrl: 'deleteCustomerView.html',
-			 controller: 'DeleteCustomerModalInstanceController as modal',
-			 resolve: {
-				 customer: function() {
-					 return customer;
-				 }
-			 }
-		 });
-		 
-		 modalInstance.result.then(function(customer) {
-			CustomerService.deleteCustomer(customer); 
-		 });
-	 }
+	//  this.deleteCustomer = function(customer) {
+	// 	 console.log('customerController.deleteCustomer(): ' + customer);
+	// 	 var modalInstance = $modal.open({
+	// 		 templateUrl: 'deleteCustomerView.html',
+	// 		 controller: 'DeleteCustomerModalInstanceController as modal',
+	// 		 resolve: {
+	// 			 customer: function() {
+	// 				 return customer;
+	// 			 }
+	// 		 }
+	// 	 });
+	// 	 
+	// 	 modalInstance.result.then(function(customer) {
+	// 		CustomerService.deleteCustomer(customer);
+	// 	 });
+	//  }
 }]);
 
 
@@ -99,7 +102,7 @@ app.controller('EditCustomerModalInstanceController', function($modalInstance, c
 	}
 });
 
-app.controller('DeleteCustomerModalInstanceController', function($modal, customer) {
+app.controller('DeleteCustomerModalInstanceController', function($modalInstance, customer) {
 	var self = this;
 	self.vm = {
 		title: "Klant verwijderen",
@@ -108,9 +111,11 @@ app.controller('DeleteCustomerModalInstanceController', function($modal, custome
 	
 	self.ok = function() {
 		console.log('DeleteCustomerModalInstanceController.ok()');
+		$modalInstance.close(self.vm.customer);
 	}
 	
 	self.cancel = function() {
 		console.log('DeleteCustomerModalInstanceController.cancel()');
+		$modalInstance.dismiss('cancel');
 	}
 });

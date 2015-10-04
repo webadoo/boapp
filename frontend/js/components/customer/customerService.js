@@ -1,6 +1,7 @@
 var app = angular.module('boapp');
 
 app.factory('CustomersService', function($resource, configParseAPI) {
+	var customers = [];
 	return $resource(configParseAPI.api_url + 'Customer', {}, {
         query: { 
 			method: 'GET', 
@@ -63,6 +64,24 @@ app.factory('CustomerModalService', ['$modal', 'CustomerService', function($moda
 			});
 		 
 			modalInstance.result.then(function(customer) {
+				CustomerService.update(customer);
+			});
+		},
+		deleteCustomer: function(customer) {
+			console.log('ConsoleModalService.deleteCustomer()');
+			var modalInstance = $modal.open({
+				templateUrl: 'js/components/customer/deleteCustomerView.html',
+				controller: 'DeleteCustomerModalInstanceController as modal',
+				resolve: {
+					customer: function() {
+						return customer;
+					}
+				}
+			});
+		 
+			modalInstance.result.then(function(customer) {
+				console.log('CustomerModalService.deleteCustomer().ModalResult: ' + customer.objectId);
+				customer.deleted = true;
 				CustomerService.update(customer);
 			});
 		}

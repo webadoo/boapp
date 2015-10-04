@@ -3,19 +3,19 @@
         <a ui-sref="profile">
             <div class="row">     
                 <div class="col-sm-12">
-                    <h3><strong>{{ customer.name }}</strong></h3>
+                    <h3><strong>{{ vm.customer.name }}</strong></h3>
     
-                    <p><i class="fa fa-map-marker"></i> {{ customer.street }} {{ customer.zip }} {{ customer.city }}</p>
+                    <p><i class="fa fa-map-marker"></i> {{ vm.customer.street }}, {{ vm.customer.zip }} {{ vm.customer.city }}</p>
                     <p>                    
-                        <i class="fa fa-phone"></i> {{ customer.phone }}
+                        <i class="fa fa-phone"></i> {{ vm.customer.phone }}
                     </p>
-                    <p><i class="fa fa-at"></i> {{ customer.email }}</p>
+                    <p><i class="fa fa-at"></i> {{ vm.customer.email }}</p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12">
                     <button type="button" class="btn btn-white" ng-click="vm.editCustomer()">Aanpassen</button>
-                    <button type="button" class="btn btn-white" ng-click="modal.deleteCustomer(c)">Verwijderen</button>
+                    <button type="button" class="btn btn-white" ng-click="vm.deleteCustomer()">Verwijderen</button>
                 </div>
             </div>
             <div class="clearfix"></div>            
