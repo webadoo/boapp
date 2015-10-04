@@ -1,7 +1,9 @@
 var app = angular.module('boapp');
 
-app.factory('CustomersService', function($resource, configParseAPI) {
-	var customers = [];
+
+
+app.factory('CustomersServiceBackend', function($resource, configParseAPI) {
+	
 	return $resource(configParseAPI.api_url + 'Customer', {}, {
         query: { 
 			method: 'GET', 
@@ -20,6 +22,10 @@ app.factory('CustomersService', function($resource, configParseAPI) {
 		}
     })
 });
+
+app.factory('CustomersService', ['CustomersServiceBackend', function(CustomersServiceBackend) {
+	var customers = [];
+}]);
 
 app.factory('CustomerService', function($resource, configParseAPI) {
 	return $resource(configParseAPI.api_url + 'Customer/:id', {}, {
