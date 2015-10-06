@@ -2,13 +2,13 @@ var app = angular.module('boapp');
 
 app.directive('customerBox', ['$modal', 'CustomerModalService', 'CustomerService', function($modal, CustomerModalService, CustomerService) {
     
-    var controller = function() {
+    var controller = function($scope) {
         var self = this;
         
         function init() {
             self.customer = angular.copy(self.customer);
         }
-        
+       
         init();
         
         self.editCustomer = function() {
@@ -25,12 +25,13 @@ app.directive('customerBox', ['$modal', 'CustomerModalService', 'CustomerService
     return {
         restrict: 'EA',
         scope: {
-            customer: '='          
+            customer: '='         
         },
         replace: true, 
         templateUrl: 'views/customerbox.html',  
         controller: controller,
         controllerAs: 'vm',
         bindToController: true
+       
     };
 }]);

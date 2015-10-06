@@ -1,9 +1,29 @@
 var app = angular.module('boapp');
 
-
-
-app.factory('CustomersServiceBackend', function($resource, configParseAPI) {
+app.factory('CustomersSharedDataService', function() {
+	console.log('CustomersSharedDataService');
 	
+	var theData = {
+		customers: [],
+		add: add,
+		remove: remove
+	};
+	
+	function add(customer) {
+		console.log('CustomersSharedDataService.push(): ' + customer);
+		theData.customers.push(customer);
+	}
+	
+	function remove(customer) {
+		console.log('CustomerSharedDataService.remove(): ' + customer.objectId);
+		theData.customers = _.reject(theData.customers, function(c) { return c.objectId === customer.objectId});				
+	}
+	
+	return theData;
+});
+
+
+app.factory('CustomersService', function($resource, configParseAPI) {
 	return $resource(configParseAPI.api_url + 'Customer', {}, {
         query: { 
 			method: 'GET', 
@@ -22,10 +42,6 @@ app.factory('CustomersServiceBackend', function($resource, configParseAPI) {
 		}
     })
 });
-
-app.factory('CustomersService', ['CustomersServiceBackend', function(CustomersServiceBackend) {
-	var customers = [];
-}]);
 
 app.factory('CustomerService', function($resource, configParseAPI) {
 	return $resource(configParseAPI.api_url + 'Customer/:id', {}, {
@@ -55,9 +71,10 @@ app.factory('CustomerService', function($resource, configParseAPI) {
 	})
 });
 
-app.factory('CustomerModalService', ['$modal', 'CustomerService', function($modal, CustomerService) {
+app.factory('CustomerModalService', ['$modal', 'CustomerService', 'CustomersSharedDataService', function($modal, CustomerService, CustomersSharedDataService) {
 	return {
 		editCustomer: function(customer) {
+			var customerForEdit = 
 			console.log('CustomerModalService.editCustomer()');
 			var modalInstance = $modal.open({
 				templateUrl: 'views/modal_customer.html',
@@ -86,9 +103,14 @@ app.factory('CustomerModalService', ['$modal', 'CustomerService', function($moda
 			});
 		 
 			modalInstance.result.then(function(customer) {
+				CustomersSharedDataService.title = '123';
 				console.log('CustomerModalService.deleteCustomer().ModalResult: ' + customer.objectId);
 				customer.deleted = true;
 				CustomerService.update(customer);
+				CustomersSharedDataService.remove(customer);
+				//CustomersSharedDataService.customers = _.reject(CustomersSharedDataService.customers, function(c) { return c.objectId === customer.objectId});
+				console.log(CustomersSharedDataService.customers);
+				
 			});
 		}
 	}

@@ -1,16 +1,17 @@
 var app = angular.module('boapp');
 
-app.controller('CustomersController', ['$scope', '$modal', 'CustomersService', 'CustomerService', function($scope, $modal, CustomersService, CustomerService) {
+app.controller('CustomersController', ['$scope', '$modal', 'CustomersService', 'CustomerService', 'CustomersSharedDataService', function($scope, $modal, CustomersService, CustomerService, CustomersSharedDataService) {
 	 this.vm = {
-	 	search: '',
-		 customers: {}
+	 	search: ''
 	 };
+	 
+	 $scope.data = CustomersSharedDataService;
 	 
 	 this.getCustomers = function() {
 		console.log('customerController.getCustomers()');
-		CustomersService.query({ where: { deleted: false }, order: 'name' }).$promise.then(function(result) {
- 			$scope.customers = result.results;
-            console.log($scope.customers);
+		console.log('search: ' + this.vm.search)
+		CustomersService.query({ where: { deleted: false, name: this.vm.search }, order: 'name' }).$promise.then(function(result) {
+			CustomersSharedDataService.customers = result.results;
 		});
 	 };
 	 
@@ -25,7 +26,8 @@ app.controller('CustomersController', ['$scope', '$modal', 'CustomersService', '
        
        	 modalInstance.result.then(function(customer) {
           	console.log(customer);
-          	CustomersService.create(customer); 
+          	CustomersService.create(customer);
+			CustomersSharedDataService.add(customer);		 
        	 });
 	 }
 	 
@@ -70,7 +72,7 @@ app.controller('AddCustomerModalInstanceController', function($modalInstance) {
 	var self = this;
 	self.vm = {
 		title: "Klant toevoegen",
-		customer: {},
+		customer: { deleted: false },
 	}
 	
 	self.ok = function() {
