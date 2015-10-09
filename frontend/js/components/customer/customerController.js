@@ -41,7 +41,7 @@ app.controller('AddCustomerModalInstanceController', function($modalInstance) {
 	var self = this;
 	self.vm = {
 		title: "Klant toevoegen",
-		customer: { deleted: false },
+		customer: { deleted: false }
 	}
 	
 	self.ok = function() {
