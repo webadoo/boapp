@@ -6,11 +6,15 @@ app.controller('CustomersController', ['$scope', '$modal', 'CustomersService', '
 	 };
 	 
 	 $scope.data = CustomersSharedDataService;
-	 
+
 	 this.getCustomers = function() {
 		console.log('customerController.getCustomers()');
-		console.log('search: ' + this.vm.search)
-		CustomersService.query({ where: { deleted: false, name: this.vm.search }, order: 'name' }).$promise.then(function(result) {
+		var where = { deleted: false };
+		if (this.vm.search) { 
+			where.name = this.vm.search; 
+			console.log(where);
+		};
+		CustomersService.query({ where: where, order: 'name' }).$promise.then(function(result) {
 			CustomersSharedDataService.customers = result.results;
 		});
 	 };
@@ -30,41 +34,6 @@ app.controller('CustomersController', ['$scope', '$modal', 'CustomersService', '
 			CustomersSharedDataService.add(customer);		 
        	 });
 	 }
-	 
-	//  this.editCustomer = function(customer) {
-	// 	 console.log('customerController.editCustomer():' + customer);
-	// 	 
-	// 	 var modalInstance = $modal.open({
-	// 		 templateUrl: 'views/modal_customer.html',
-	// 		 controller: 'EditCustomerModalInstanceController as modal',
-	// 		 resolve: {
-	// 			 customer: function() {
-	// 				 return customer;
-	// 			 }
-	// 		 }
-	// 	 });
-	// 	 
-	// 	 modalInstance.result.then(function(customer) {
-	// 		 CustomerService.update(customer);
-	// 	 });
-	//  }
-	 
-	//  this.deleteCustomer = function(customer) {
-	// 	 console.log('customerController.deleteCustomer(): ' + customer);
-	// 	 var modalInstance = $modal.open({
-	// 		 templateUrl: 'deleteCustomerView.html',
-	// 		 controller: 'DeleteCustomerModalInstanceController as modal',
-	// 		 resolve: {
-	// 			 customer: function() {
-	// 				 return customer;
-	// 			 }
-	// 		 }
-	// 	 });
-	// 	 
-	// 	 modalInstance.result.then(function(customer) {
-	// 		CustomerService.deleteCustomer(customer);
-	// 	 });
-	//  }
 }]);
 
 
