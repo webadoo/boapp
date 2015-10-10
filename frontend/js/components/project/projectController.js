@@ -1,11 +1,11 @@
 var app = angular.module('boapp');
 
-app.controller('ProjectsController', ['$scope', '$modal', 'ProjectService', 'ProjectSharedDataService'], function($scope, $modal, ProjectService, ProjectSharedDataService) {
+app.controller('ProjectsController', ['$scope', '$modal', 'ProjectService', 'ProjectsSharedDataService'], function($scope, $modal, ProjectService, ProjectsSharedDataService) {
 	this.vm = {
 		search: ''
 	};
 	
-	$scope.data = ProjectSharedDataService;
+	$scope.data = ProjectsSharedDataService;
 	
 	this.getProjects = function() {
 		console.log('ProjectsController.getProjects()');
@@ -15,7 +15,7 @@ app.controller('ProjectsController', ['$scope', '$modal', 'ProjectService', 'Pro
 			where.name = this.vm.search;
 		};
 		ProjectService.query({ where: where }).$promise.then(function(result) {
-			ProjectSharedDataService.projects = result.results;
+			ProjectsSharedDataService.projects = result.results;
 		});
 	};
 	
@@ -30,7 +30,7 @@ app.controller('ProjectsController', ['$scope', '$modal', 'ProjectService', 'Pro
 		
 		modalInstance.result.then(function(project) {
 			ProjectService.create(project);
-			ProjectSharedDataService.add(project);
+			ProjectsSharedDataService.add(project);
 		});
 	}
 });

@@ -158,51 +158,51 @@ function EditArticleModalInstanceController ($scope, $modalInstance, article) {
  /**
   * Projects
   */
- app.controller('ProjectsController', function($scope, $modal, ProjectsService, ProjectService) {
-
-  // $scope.search = "";
-  
-   $scope.getProjects = function() {	
-       //console.log('Search: ' + $scope.search.name);
-	 	 ProjectsService.query({ order: 'name' }).$promise.then(function(result) {
-			$scope.projects = result.results;
-            console.log($scope.projects);
-	  });		 		 
-   };      
-   
-   $scope.addProject = function() {
-       var modalInstance = $modal.open({
-          templateUrl: 'views/modal_project.html',
-          controller: AddProjectModalInstanceController,
-          scope: $scope    
-       });
-       
-       modalInstance.result.then(function(project) {
-          console.log(project);
-          ProjectsService.create(project); 
-       });     
-   };
-   
-   $scope.editProject = function(project) {
-       alert('edit project');
-   };
-});
-
-function AddProjectModalInstanceController ($scope, $modalInstance, ProjectsService) {
-    $scope.title = "Project toevoegen";
-    $scope.project = {};
-    $scope.ok = function () {
-        $modalInstance.close($scope.project);
-    };
-
-    $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-    };
-    
-    ProjectsService.query({ order: 'name' }).$promise.then(function(result) {
-	   $scope.statusses = result.results;
-	});		 		 
-}
+//  app.controller('ProjectsController', function($scope, $modal, ProjectsService, ProjectService) {
+// 
+//   // $scope.search = "";
+//   
+//    $scope.getProjects = function() {	
+//        //console.log('Search: ' + $scope.search.name);
+// 	 	 ProjectsService.query({ order: 'name' }).$promise.then(function(result) {
+// 			$scope.projects = result.results;
+//             console.log($scope.projects);
+// 	  });		 		 
+//    };      
+//    
+//    $scope.addProject = function() {
+//        var modalInstance = $modal.open({
+//           templateUrl: 'views/modal_project.html',
+//           controller: AddProjectModalInstanceController,
+//           scope: $scope    
+//        });
+//        
+//        modalInstance.result.then(function(project) {
+//           console.log(project);
+//           ProjectsService.create(project); 
+//        });     
+//    };
+//    
+//    $scope.editProject = function(project) {
+//        alert('edit project');
+//    };
+// });
+// 
+// function AddProjectModalInstanceController ($scope, $modalInstance, ProjectsService) {
+//     $scope.title = "Project toevoegen";
+//     $scope.project = {};
+//     $scope.ok = function () {
+//         $modalInstance.close($scope.project);
+//     };
+// 
+//     $scope.cancel = function () {
+//         $modalInstance.dismiss('cancel');
+//     };
+//     
+//     ProjectsService.query({ order: 'name' }).$promise.then(function(result) {
+// 	   $scope.statusses = result.results;
+// 	});		 		 
+// }
 
 /**
  * End Projects

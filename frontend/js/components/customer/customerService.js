@@ -74,7 +74,7 @@ app.factory('CustomerService', function($resource, configParseAPI) {
 app.factory('CustomerModalService', ['$modal', 'CustomerService', 'CustomersSharedDataService', function($modal, CustomerService, CustomersSharedDataService) {
 	return {
 		editCustomer: function(customer) {
-			var customerForEdit = 
+			//var customerForEdit = 
 			console.log('CustomerModalService.editCustomer()');
 			var modalInstance = $modal.open({
 				templateUrl: 'views/modal_customer.html',

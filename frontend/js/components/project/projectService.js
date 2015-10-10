@@ -63,3 +63,44 @@ app.factory('ProjectService', function($resource, configParseAPI) {
 		}
     })
 });
+
+app.factory('ProjectModalService', ['$modal', 'ProjectService', 'ProjectSharedDataService', function($modal, ProjectService, ProjectSharedDataService) {
+	
+	return {
+		editProject: editProject,
+		deleteProject: deleteProject
+	};
+	
+	function editProject(project) {
+		var modalInstance = $modal.open({
+			templateUrl: 'views/modal_project.html',
+			controller: 'EditProjectModalInstanceController',
+			resolve: {
+				project: function() {
+					return project;
+				}
+			}
+		});	
+		
+		modalInstance.result.then(function(project) {
+			ProjectService.update(project);
+		})
+	};
+	
+	function deleteProject(project) {
+		var modalInstance = $modal.open({
+			templateUrl: 'js/components/project/deleteProjectView.html',
+			resolve: {
+				project: function() {
+					return project;
+				}
+			}
+		});
+		
+		modalInstance.result.then(function(project) {
+			project.deleted = true;
+			ProjectService.update(project);
+			ProjectSharedDataService.remove(project);
+		});
+	};
+}]);
