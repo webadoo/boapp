@@ -1,6 +1,5 @@
 var app = angular.module('boapp');
 
-
 app.controller('ArticlesController', ['$scope', '$modal', 'ArticlesService', 'ArticleService', 'ArticlesSharedDataService', function($scope, $modal, ArticlesService, ArticleService, ArticlesSharedDataService) {
 	 this.vm = {
 	 	search: ''
@@ -27,65 +26,62 @@ app.controller('ArticlesController', ['$scope', '$modal', 'ArticlesService', 'Ar
           	controller: 'AddArticleModalInstanceController as modal'
        	 });
        
-       	 modalInstance.result.then(function(customer) {
-          	console.log(customer);
-          	CustomersService.create(customer);
-			CustomersSharedDataService.add(customer);		 
+       	 modalInstance.result.then(function(article) {          
+          	ArticlesService.create(article);
+			ArticlesSharedDataService.add(article);		 
        	 });
 	 }
 }]);
 
 
-app.controller('AddCustomerModalInstanceController', function($modalInstance) {
+app.controller('AddArticleModalInstanceController', function($modalInstance) {
 	var self = this;
 	self.vm = {
-		title: "Klant toevoegen",
-		customer: { deleted: false }
+		title: "Artikel toevoegen",
+		article: { deleted: false }
 	}
 	
 	self.ok = function() {
-		console.log('AddCustomerModalInstanceController.ok()');
-		$modalInstance.close(self.vm.customer);
+		$modalInstance.close(self.vm.article);
 	}
 	
 	self.cancel = function() {
-		console.log('AddCustomerModalInstanceController.cancel()');
 		$modalInstance.dismiss('cancel');
 	};
 });
 
-app.controller('EditCustomerModalInstanceController', function($modalInstance, customer) {
+app.controller('EditArticleModalInstanceController', function($modalInstance, article) {
 	var self = this;
 	self.vm = {
-		title: "Klant aanpassen",
-		customer: customer
+		title: "Artikel aanpassen",
+		article: article
 	}
 	
 	self.ok = function() {
-		console.log('EditCustomerModalInstanceController.ok()');
-		$modalInstance.close(self.vm.customer);
+		console.log('EditArticleModalInstanceController.ok()');
+		$modalInstance.close(self.vm.article);
 	};
 	
 	self.cancel = function() {
-		console.log('EditCustomerModalInstanceController.cancel()');
+		console.log('EditArticleModalInstanceController.cancel()');
 		$modalInstance.dismiss('cancel');
 	}
 });
 
-app.controller('DeleteCustomerModalInstanceController', function($modalInstance, customer) {
+app.controller('DeleteArticleModalInstanceController', function($modalInstance, article) {
 	var self = this;
 	self.vm = {
-		title: "Klant verwijderen",
-		customer: customer
+		title: "Artikel verwijderen",
+		article: article
 	}
 	
 	self.ok = function() {
-		console.log('DeleteCustomerModalInstanceController.ok()');
-		$modalInstance.close(self.vm.customer);
+		console.log('DeleteArticleModalInstanceController.ok()');
+		$modalInstance.close(self.vm.article);
 	}
 	
 	self.cancel = function() {
-		console.log('DeleteCustomerModalInstanceController.cancel()');
+		console.log('DeleteArticleModalInstanceController.cancel()');
 		$modalInstance.dismiss('cancel');
 	}
 });
