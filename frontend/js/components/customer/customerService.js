@@ -1,12 +1,13 @@
 var app = angular.module('boapp');
 
-app.factory('CustomersSharedDataService', function() {
+app.factory('CustomersSharedDataService', ['CustomersService', function(CustomersService) {
 	console.log('CustomersSharedDataService');
 	
 	var theData = {
 		customers: [],
 		add: add,
-		remove: remove
+		remove: remove,
+		getCustomers: getCustomers
 	};
 	
 	function add(customer) {
@@ -19,8 +20,31 @@ app.factory('CustomersSharedDataService', function() {
 		theData.customers = _.reject(theData.customers, function(c) { return c.objectId === customer.objectId});				
 	}
 	
+	
+	function getCustomers(where, order) {
+		
+		console.log('CustomerSharedDataService.getCustomers()');
+		
+		var queryParams = {};
+		
+		if (where) {
+			queryParams.where = where;
+		}
+		
+		if (order) {
+			queryParams.order = order;
+		}
+		
+		CustomersService.query(queryParams).$promise.then(function(result) {
+			console.log('CustomerSharedDataService.getCustomers().query()');
+			theData.customers = result.results;
+			console.log(theData.customers);
+			return true;
+		});
+	}
+	
 	return theData;
-});
+}]);
 
 
 app.factory('CustomersService', function($resource, configParseAPI) {

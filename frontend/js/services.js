@@ -110,7 +110,7 @@ app.factory('ArticleService', function($resource, configParseAPI) {
 /**
  * Projects
  */
-app.factory('ProjectsService', function($resource, configParseAPI) {
+app.factory('ProjectsService_old', function($resource, configParseAPI) {
 	return $resource(configParseAPI.api_url + 'Project', {}, {
         query: { 
 			method: 'GET', 
@@ -130,7 +130,7 @@ app.factory('ProjectsService', function($resource, configParseAPI) {
     })
 });
 
-app.factory('ProjectService', function($resource, configParseAPI) {
+app.factory('ProjectService_old', function($resource, configParseAPI) {
 	return $resource(configParseAPI.api_url + 'Project/:id', {}, {
 		show: { 
 			method: 'GET',						

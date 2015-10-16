@@ -21,7 +21,7 @@ app.factory('ProjectsSharedDataService', function () {
 });
 
 
-app.factory('ProjectService', function($resource, configParseAPI) {
+app.factory('ProjectsService', function($resource, configParseAPI) {
 	return $resource(configParseAPI.api_url + 'Project', {}, {
         query: { 
 			method: 'GET', 
@@ -38,6 +38,12 @@ app.factory('ProjectService', function($resource, configParseAPI) {
 				'X-Parse-REST-API-Key': configParseAPI.parse_rest_api_key
 			}
 		},
+		
+    })
+});
+
+app.factory('ProjectService', function($resource, configParseAPI) {
+	return $resource(configParseAPI.api_url + 'Project/:id', {}, {
 		show: { 
 			method: 'GET',						
 			headers: {
@@ -61,46 +67,46 @@ app.factory('ProjectService', function($resource, configParseAPI) {
 				'X-Parse-REST-API-Key': configParseAPI.parse_rest_api_key
 			}
 		}
-    })
+	})
 });
 
-app.factory('ProjectModalService', ['$modal', 'ProjectService', 'ProjectSharedDataService', function($modal, ProjectService, ProjectSharedDataService) {
-	
+app.factory('ProjectModalService', ['$modal', 'ProjectService', 'ProjectsSharedDataService', function($modal, ProjectService, ProjectsSharedDataService) {
 	return {
-		editProject: editProject,
-		deleteProject: deleteProject
-	};
-	
-	function editProject(project) {
-		var modalInstance = $modal.open({
-			templateUrl: 'views/modal_project.html',
-			controller: 'EditProjectModalInstanceController',
-			resolve: {
-				project: function() {
-					return project;
+		editProject: function(project) {
+			console.log(project);
+			var modalInstance = $modal.open({
+				templateUrl: 'views/modal_project.html',
+				controller: 'EditProjectModalInstanceController as modal',
+				resolve: {
+					project: function() {
+						return project;
+					}
 				}
-			}
-		});	
+			});	
+			
+			modalInstance.result.then(function(project) {
+				ProjectService.update(project);
+			});
+		},
 		
-		modalInstance.result.then(function(project) {
-			ProjectService.update(project);
-		})
-	};
-	
-	function deleteProject(project) {
-		var modalInstance = $modal.open({
-			templateUrl: 'js/components/project/deleteProjectView.html',
-			resolve: {
-				project: function() {
-					return project;
+		deleteProject: function(project) {
+			console.log('ProjectModalService ' + project.title);
+			var modalInstance = $modal.open({
+				templateUrl: 'js/components/project/deleteProjectView.html',
+				controller: 'DeleteProjectModalInstanceController as modal',
+				resolve: {
+					project: function() {
+						console.log('ProjectModalService.resolve() ' + project);
+						return project;
+					}
 				}
-			}
-		});
-		
-		modalInstance.result.then(function(project) {
-			project.deleted = true;
-			ProjectService.update(project);
-			ProjectSharedDataService.remove(project);
-		});
-	};
+			});
+			
+			modalInstance.result.then(function(project) {
+				project.deleted = true;
+				ProjectService.update(project);
+				ProjectsSharedDataService.remove(project);
+			});
+		}
+	}
 }]);
