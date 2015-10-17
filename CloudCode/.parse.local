@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "BoApp": {
+      "applicationId": "8D8eeq1axttkT6UAzsnOP1QqBjRHjHWxtGdJC8LD"
+    },
+    "_default": {
+      "link": "BoApp"
+    }
+  }
+}
