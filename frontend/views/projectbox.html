@@ -2,10 +2,19 @@
     <div class="contact-box">
         <a ui-sref="profile">
             <div class="row">     
-                <div class="col-sm-12">
+                <div class="col-sm-6">
                     <h3><strong>{{ vm.project.title }}</strong></h3>
 				</div>
+                <div class="col-sm-6">
+                    <h3><strong>{{ vm.project.customer.name }}</strong></h3>
+				</div>
             </div>
+            <div class="row">     
+                <div class="col-sm-12">
+                    {{ vm.project.description }}
+				</div>
+            </div>
+            <br />
             <div class="row">
                 <div class="col-sm-12">
                     <button type="button" class="btn btn-white" ng-click="vm.convertProjectToInvoice()">Factureren</button>
