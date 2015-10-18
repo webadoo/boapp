@@ -7,38 +7,38 @@
             <div class="row">
                 <div class="col-sm-8">
                     <label>Naam</label> 
-                    <input type="text" placeholder="Naam..." class="form-control" ng-model="article.name">
+                    <input type="text" placeholder="Naam..." class="form-control" ng-model="modal.vm.article.name">
                 </div>  
                 <div class="col-sm-4">
                     <label>Productnummer</label> 
-                    <input type="text" placeholder="Productnummer..." class="form-control" ng-model="article.productNumber">
+                    <input type="text" placeholder="Productnummer..." class="form-control" ng-model="modal.vm.article.productNumber">
                 </div>               
             </div>
             <div class="row">
                  <div class="col-sm-12">                    
                     <label>Leverancier</label> 
-                    <input type="text" placeholder="Leverancier..." class="form-control" ng-model="article.supplier">
+                    <input type="text" placeholder="Leverancier..." class="form-control" ng-model="modal.vm.article.supplier">
                 </div>                                     
             </div> 
             <div class="row">                                                
                 <div class="col-sm-4">
                     <label>Aankoopprijs</label> 
-                    <input type="email" placeholder="Aankoopprijs..." class="form-control" ng-model="article.buyPriceExclVat">
+                    <input type="email" placeholder="Aankoopprijs..." class="form-control" ng-model="modal.vm.article.buyPriceExclVat">
                 </div>
                 <div class="col-sm-4">
                     <label>Aankoopprijs incl BTW</label> 
-                    <input type="text" placeholder="Aankoopprijs incl BTW..." class="form-control" ng-model="article.buyPriceInclVat">
+                    <input type="text" placeholder="Aankoopprijs incl BTW..." class="form-control" ng-model="modal.vm.article.buyPriceInclVat">
                 </div>
                 <div class="col-sm-4">
                     <label>Mijn prijs</label> 
-                    <input type="text" placeholder="Mijn prijs..." class="form-control" ng-model="article.personalBuyPrice">
+                    <input type="text" placeholder="Mijn prijs..." class="form-control" ng-model="modal.vm.article.personalBuyPrice">
                 </div>
             </div>
             
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-white" ng-click="cancel()">Sluiten</button>
-        <button type="button" class="btn btn-primary" ng-click="ok()">Opslaan</button>
+        <button type="button" class="btn btn-white" ng-click="modal.cancel()">Sluiten</button>
+        <button type="button" class="btn btn-primary" ng-click="modal.ok()">Opslaan</button>
     </div>
 </div>

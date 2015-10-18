@@ -36,6 +36,8 @@ app.controller('ProjectsController', ['$scope', '$modal', 'ProjectsService', 'Pr
 	}
 }]);
 
+
+
 app.controller('AddProjectModalInstanceController', ['$scope', '$modalInstance', 'CustomersSharedDataService', function($scope, $modalInstance, CustomersSharedDataService) {
 	var self = this;
 	self.vm = {
@@ -72,11 +74,7 @@ app.controller('AddProjectModalInstanceController', ['$scope', '$modalInstance',
 	}
 
 	init();
-	
-	
-	
-	
-	
+
 	self.ok = function() {
 		console.log('selected customerId: ' + $scope.data.selectedCustomerId);
 		$modalInstance.close(self.vm.project);
@@ -120,4 +118,44 @@ app.controller('DeleteProjectModalInstanceController', function($modalInstance, 
 		console.log('DeleteProjectModalInstanceController.cancel()');
 		$modalInstance.dismiss('cancel');
 	}
+});
+
+
+app.controller('ProjectController', ['$scope', function($scope) {
+	var self = this;
+	self.vm = {
+		
+	}
+	
+}]);
+
+app.controller('AddArticleToProjectModalInstanceController', function($modalInstance) {
+	var self = this;
+	self.vm = {
+		title: 'Artikel toevoegen'
+	};
+	
+	self.ok = function() {
+		$modalInstance.close(self.vm.article);
+	};
+	
+	self.cancel = function() {
+		$modalInstance.dismiss('cancel');	
+	};
+});
+
+app.controller('AddArticleToProjectModalInstanceController', function($modalInstance, article) {
+	var self = this;
+	self.vm = {
+		title: 'Artikel aanpassen',
+		article: article
+	};
+	
+	self.ok = function() {
+		$modalInstance.close(self.vm.article);
+	};
+	
+	self.cancel = function() {
+		$modalInstance.dismiss('cancel');	
+	};
 });

@@ -1,53 +1,19 @@
 
-<div class="wrapper wrapper-content animated fadeInRight"  ng-controller="ArticlesController">
+<div class="wrapper wrapper-content animated fadeInRight"  ng-controller="ArticlesController as art">
     <div class="ibox-content m-b-sm border-bottom">
         <div class="row m-b-sm m-t-sm">					
-			<div class="col-md-12">
-				<div class="input-group"><input type="text" placeholder="Zoeken" class="input-sm form-control"> <span class="input-group-btn">
-														<button type="button" class="btn btn-sm btn-primary" ng-click="getArticles()"> Zoek!</button> </span>
+			<div class="col-md-10">
+				<div class="input-group"><input type="text" placeholder="Zoeken" class="input-sm form-control" ng-model="art.vm.search"> <span class="input-group-btn">
+														<button type="button" class="btn btn-sm btn-primary" ng-click="art.getArticles()"> Zoek!</button> </span>
                 </div>
 			</div>
+            <div class="col-md-2">
+                <a href="" class="btn btn-primary btn-sm" ng-click="art.addArticle()">Nieuw artikel</a>
+            </div>
 		</div>
     </div>
     
     <div class="row">
-        <div class="col-lg-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Artikels</h5>  
-                    <div class="ibox-tools">
-                        <a href="" class="btn btn-primary btn-xs" ng-click="addArticle()">Nieuw artikel</a>
-                    </div>             
-                </div>
-                <div class="ibox-content">               
-                    <table st-table="articles" class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>Omschrijving</th>
-                            <th>Productnummer</th>
-                            <th>Leverancier</th>
-                            <th>Aankoopprijs excl BTW</th>
-                            <th>Aankoopprijs incl BTW</th>
-                            <th>Mijn prijs</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="article in articles">
-                            <td>{{ article.name }}</td>
-                            <td>{{ article.productNumber }}</td>
-                            <td>{{ article.supplier.name }}</td>
-                            <td>€{{ article.buyPriceExclVat }}</td>
-                            <td>€{{ article.buyPriceInclVat }}</td>
-                            <td>€{{ article.personalBuyPrice }}</td>
-                            <td>
-                            <button type="button" class="btn btn-outline btn-primary btn-xs" ng-click="editArticle(article)">Edit</button>                       
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+        <article-box ng-repeat="a in data.articles" article="a"></article-box>
     </div>
 </div>

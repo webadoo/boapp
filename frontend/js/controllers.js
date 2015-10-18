@@ -83,71 +83,71 @@ app.controller('MainController', function() {
 /**
  * Articles
  */
-app.controller('ArticlesController', function($scope, $modal, ArticlesService, ArticleService) {
-
-   $scope.search = "";
-  
-   $scope.getArticles = function() {	
-       console.log('Search: ' + $scope.search.name);
-	 	 ArticlesService.query({ order: 'name' }).$promise.then(function(result) {
-			$scope.articles = result.results;
-            console.log($scope.articles);
-	  });		 		 
-   };      
-   
-   $scope.addArticle = function() {
-       var modalInstance = $modal.open({
-          templateUrl: 'views/modal_article.html',
-          controller: AddArticleModalInstanceController,
-          scope: $scope    
-       });
-       
-       modalInstance.result.then(function(article) {
-          console.log(article);
-          ArticlesService.create(article); 
-       });     
-   };
-   
-   $scope.editArticle = function(article) {
-       var modalInstance = $modal.open({
-          templateUrl: 'views/modal_article.html',
-          controller: EditArticleModalInstanceController,
-          resolve: {
-              article: function() {
-                return article;  
-              } 
-          }   
-       });
-       
-       modalInstance.result.then(function(article) {
-          ArticleService.update(article); 
-       });     
-   };
-});
-
-function AddArticleModalInstanceController ($scope, $modalInstance) {
-    $scope.title = "Artikel toevoegen";
-    $scope.article = {};
-    $scope.ok = function () {
-        $modalInstance.close($scope.article);
-    };
-
-    $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-    };
-}
-
-function EditArticleModalInstanceController ($scope, $modalInstance, article) {
-    $scope.title = "Artikel aanpassen";
-    $scope.article = article;
-    $scope.ok = function () {
-        $modalInstance.close($scope.article);
-    };
-
-    $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-    };
-}
+// app.controller('ArticlesController', function($scope, $modal, ArticlesService, ArticleService) {
+// 
+//    $scope.search = "";
+//   
+//    $scope.getArticles = function() {	
+//        console.log('Search: ' + $scope.search.name);
+// 	 	 ArticlesService.query({ order: 'name' }).$promise.then(function(result) {
+// 			$scope.articles = result.results;
+//             console.log($scope.articles);
+// 	  });		 		 
+//    };      
+//    
+//    $scope.addArticle = function() {
+//        var modalInstance = $modal.open({
+//           templateUrl: 'views/modal_article.html',
+//           controller: AddArticleModalInstanceController,
+//           scope: $scope    
+//        });
+//        
+//        modalInstance.result.then(function(article) {
+//           console.log(article);
+//           ArticlesService.create(article); 
+//        });     
+//    };
+//    
+//    $scope.editArticle = function(article) {
+//        var modalInstance = $modal.open({
+//           templateUrl: 'views/modal_article.html',
+//           controller: EditArticleModalInstanceController,
+//           resolve: {
+//               article: function() {
+//                 return article;  
+//               } 
+//           }   
+//        });
+//        
+//        modalInstance.result.then(function(article) {
+//           ArticleService.update(article); 
+//        });     
+//    };
+// });
+// 
+// function AddArticleModalInstanceController ($scope, $modalInstance) {
+//     $scope.title = "Artikel toevoegen";
+//     $scope.article = {};
+//     $scope.ok = function () {
+//         $modalInstance.close($scope.article);
+//     };
+// 
+//     $scope.cancel = function () {
+//         $modalInstance.dismiss('cancel');
+//     };
+// }
+// 
+// function EditArticleModalInstanceController ($scope, $modalInstance, article) {
+//     $scope.title = "Artikel aanpassen";
+//     $scope.article = article;
+//     $scope.ok = function () {
+//         $modalInstance.close($scope.article);
+//     };
+// 
+//     $scope.cancel = function () {
+//         $modalInstance.dismiss('cancel');
+//     };
+// }
 
 
 /**

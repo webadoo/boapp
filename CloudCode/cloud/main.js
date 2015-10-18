@@ -26,3 +26,37 @@ Parse.Cloud.define('sumOfProjectWorkHours', function(request, response) {
           }
    });
 });
+
+
+Parse.Cloud.define("getProjects", function(request, response) {
+    var projects = [];
+    var q = new Parse.Query('Project');
+    q.each(function(project) {
+        var promise = Parse.Promise.as();
+        
+        var workingHoursList = [];
+        promise = promise.then(function() {
+            var w = new Parse.Query('ProjectWorkingHour');
+            w.equalTo('project', project);
+            
+            return w.each(function(workingHour) {
+                //workingHoursList.push(JSON.stringify(workingHour));
+                workingHoursList.push(workingHour.toJSON());
+            });
+        }).then(function() {
+            project.set('workingHours', workingHoursList);
+            //projects.push(JSON.stringify(project));
+            projects.push(project.toJSON());
+        });
+        return promise;
+    }).then(function() {
+        // var resultsJson = [];
+        // for (var i = 0; i<projects.length; i++) {
+        //   var resultJson = (projects[i].toJSON());
+        //  
+        //   resultsJson.push(resultJson);
+        // }
+        response.success(projects);
+        //response.success(resultsJson);
+    });
+});

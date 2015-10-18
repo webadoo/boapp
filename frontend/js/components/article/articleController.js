@@ -14,7 +14,7 @@ app.controller('ArticlesController', ['$scope', '$modal', 'ArticlesService', 'Ar
 			console.log(where);
 		};
 		ArticlesService.query({ where: where, order: 'name' }).$promise.then(function(result) {
-			ArticlesSharedDataService.customers = result.results;
+			ArticlesSharedDataService.articles = result.results;
 		});
 	 };
 	 

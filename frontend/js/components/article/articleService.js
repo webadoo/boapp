@@ -19,17 +19,22 @@ app.factory('ArticlesSharedDataService', ['ArticlesService', function(ArticlesSe
 		theData.articles = _.reject(theData.articles, function(a) { return a.objectId === article.objectId });
 	}
 	
-	var getArticles = new Promise(function(resolve, reject) {
-		// do a thing, possibly async, then…
-	   	var list = ArticlesService.query();
+	function getArticles(where, order) {
+		var queryParams = {};
+		if (where) {
+			queryParams.where = where;
+		}
 		
-		if (ok) {
-			resolve("Stuff worked!");
+		if (order) {
+			queryParams.order = order;
 		}
-		else {
-			reject(Error("It broke"));
-		}
-	});
+		
+		ArticlesService.query(queryParams).$promise.then(function(result){
+			console.log('ArticlesSharedDataService.getArticles().query');
+			theData.articles = result.results;
+			return true;
+		});
+	}
 	
 	return theData;
 }]);
@@ -85,6 +90,7 @@ app.factory('ArticleService', function($resource, configParseAPI) {
 app.factory('ArticleModalService', ['$modal', 'ArticleService', 'ArticlesSharedDataService', function($modal, ArticleService, ArticlesSharedDataService) {
 	return {
 		editArticle: function(article) {
+			console.log(article);
 			var modalInstance = $modal.open({
 				templateUrl: 'views/modal_article.html',
 				controller: 'EditArticleModalInstanceController as modal',
@@ -101,7 +107,7 @@ app.factory('ArticleModalService', ['$modal', 'ArticleService', 'ArticlesSharedD
 		},
 		deleteArticle: function(article) {
 			var modalInstance = $modal.open({
-				templateUrl: 'js/components/customer/deleteArticleView.html',
+				templateUrl: 'js/components/article/deleteArticleView.html',
 				controller: 'DeleteArticleModalInstanceController as modal',
 				resolve: {
 					article: function() {

@@ -12,11 +12,11 @@ app.directive('articleBox', ['$modal', 'ArticleModalService', 'ArticleService', 
         init();
         
         self.editArticle = function() {            
-            ArticleModalService.editCustomer(self.article);
+            ArticleModalService.editArticle(self.article);
         }
         
-        self.deleteCustomer = function() {
-            ArticleModalService.deleteCustomer(self.article);
+        self.deleteArticle = function() {
+            ArticleModalService.deleteArticle(self.article);
         }     
     };
     
