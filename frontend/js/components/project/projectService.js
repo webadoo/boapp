@@ -38,7 +38,6 @@ app.factory('ProjectsService', function($resource, configParseAPI) {
 				'X-Parse-REST-API-Key': configParseAPI.parse_rest_api_key
 			}
 		},
-		
     })
 });
 

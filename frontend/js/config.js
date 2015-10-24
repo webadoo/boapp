@@ -35,6 +35,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
             templateUrl: "views/projects.html",
             data: { pageTitle: 'Projecten' }
         })
+        .state('index.projectdetail', {
+            url: "/projectdetail",
+            templateUrl: "views/projectdetail.html",
+             data: { pageTitle: 'Project detail' }
+        })
         .state('index.invoices', {
             url: "/invoices",
             templateUrl: "views/minor.html",
@@ -47,7 +52,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         })
         .state('index.settings', {
             url: "/settings",
-            templateUrl: "views/minor.html",
+            templateUrl: "views/settings.html",
             data: { pagetitle: 'Instellingen' }  
         });
      

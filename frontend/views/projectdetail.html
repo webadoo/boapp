@@ -1,0 +1,95 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Project detail: Test</h2>       
+    </div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="wrapper wrapper-content animated fadeInRight">
+			<div class="ibox">
+				<div class="ibox-content">
+					<div class="row">
+						<div class="col-lg-12">
+							<h3>Algemeen</h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-2">
+							Omschrijving:
+						</div>
+						<div class="col-lg-10">
+							blabla
+						</div>	
+					</div>
+				</div>
+			</div>
+			<div class="ibox">
+				<div class="ibox-content">
+					<div class="row">
+						<div class="col-lg-12">
+							<h3>Werkuren</h3>
+							<table st-table="articles" class="table table-striped">
+								<thead>
+								<tr>
+									<th>Van</th>
+									<th>Tot</th>
+									<th>Aantal uren</th>
+									<th>Prijs per uur</th>
+									<th>Totaal</th>								
+									<th></th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr ng-repeat="article in articles">
+									<td>{{ article.name }}</td>
+									<td>{{ article.productNumber }}</td>
+									<td>{{ workhour.total</td>
+									<td>
+										<button type="button" class="btn btn-outline btn-primary btn-xs" ng-click="editArticle(article)">Edit</button>                       
+									</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ibox">
+				<div class="ibox-content">
+					<div class="row">
+						<div class="col-lg-12">
+							<h3>Materiaal</h3>
+							<table st-table="articles" class="table table-striped">
+								<thead>
+								<tr>
+									<th>Omschrijving</th>
+									<th>Productnummer</th>
+									<th>Leverancier</th>
+									<th>Aantal stuks</th>
+									<th>Prijs/stuk</th>
+									<th>Totaal</th>
+									<th></th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr ng-repeat="article in articles">
+									<td>{{ article.name }}</td>
+									<td>{{ article.productNumber }}</td>
+									<td>{{ article.supplier.name }}</td>
+									<td>€{{ article.buyPriceExclVat }}</td>
+									<td>€{{ article.buyPriceInclVat }}</td>
+									<td>€{{ article.personalBuyPrice }}</td>
+									<td>
+									<button type="button" class="btn btn-outline btn-primary btn-xs" ng-click="editArticle(article)">Edit</button>                       
+									</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
